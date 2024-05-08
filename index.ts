@@ -32,7 +32,7 @@ const kelvinToCelsius = (kelvin: number) => {
   return (kelvin - 273.15).toFixed(1);
 };
 
-const fetchWeather = async () => {
+const fetchWeather = async (): Promise<void> => {
   try {
     const res = await fetch(
       "https://api.openweathermap.org/data/2.5/weather?lat=41.38&lon=2.16&appid=afdb717c5e16706af6a787517e123666"
@@ -44,12 +44,14 @@ const fetchWeather = async () => {
     const info = document.createTextNode(infoText);
     weatherContainer.appendChild(weatherIcon);
     weatherInfo.appendChild(info);
-  } catch {}
+  } catch (error) {
+    console.error("We couldn't fetch the weather because", error);
+  }
 };
 
 fetchWeather();
 
-const fetchJoke = async () => {
+const fetchJoke = async (): Promise<void> => {
   let randomNum = Math.floor(Math.random() * 101);
   let apiUrl;
   let fetchOptions = {};
@@ -67,6 +69,7 @@ const fetchJoke = async () => {
     jokeElement.innerHTML = data.joke;
     setBackground();
   } catch (error) {
+    console.error("We couldn't fetch the joke because", error);
     jokeElement.innerHTML = "Oops! Couldn't find any joke...";
   }
 };
