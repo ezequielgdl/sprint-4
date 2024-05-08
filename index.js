@@ -11,6 +11,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 const jokeElement = document.getElementById("joke");
 const jokeBtn = document.getElementById("next-joke");
 const weatherInfo = document.getElementById("weather-info");
+const weatherIcon = document.getElementById("weather-icon");
+const weatherContainer = document.getElementById("weather-container");
+const main = document.getElementsByClassName("main");
+const backgroundLeft = document.getElementById("background-left");
+const backgroundCenter = document.getElementById("background-center");
+const backgroundRight = document.getElementById("background-right");
 const options = {
     headers: {
         Accept: "application/json",
@@ -18,25 +24,38 @@ const options = {
 };
 let jokeReport = [];
 const kelvinToCelsius = (kelvin) => {
-    return (kelvin - 273.15).toFixed(2);
+    return (kelvin - 273.15).toFixed(1);
 };
 const fetchWeather = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const res = yield fetch("https://api.openweathermap.org/data/2.5/weather?lat=41.38&lon=2.16&appid=afdb717c5e16706af6a787517e123666");
         const data = yield res.json();
-        console.log(data.main.temp);
-        const infoText = `${kelvinToCelsius(data.main.temp)}°C - Humidity: ${data.main.humidity}%`;
+        const icon = `https://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
+        weatherIcon.setAttribute("src", icon);
+        const infoText = `${kelvinToCelsius(data.main.temp)}°C`;
         const info = document.createTextNode(infoText);
+        weatherContainer.appendChild(weatherIcon);
         weatherInfo.appendChild(info);
     }
     catch (_a) { }
 });
 fetchWeather();
 const fetchJoke = () => __awaiter(void 0, void 0, void 0, function* () {
+    let randomNum = Math.floor(Math.random() * 101);
+    let apiUrl;
+    let fetchOptions = {};
+    if (randomNum % 2 === 0) {
+        apiUrl = "https://icanhazdadjoke.com/";
+        fetchOptions = options;
+    }
+    else {
+        apiUrl = "https://v2.jokeapi.dev/joke/Any?type=single";
+    }
     try {
-        const res = yield fetch("https://icanhazdadjoke.com/", options);
+        const res = yield fetch(apiUrl, fetchOptions);
         const data = yield res.json();
         jokeElement.innerHTML = data.joke;
+        setBackground();
     }
     catch (error) {
         jokeElement.innerHTML = "Oops! Couldn't find any joke...";
@@ -58,4 +77,11 @@ const addScore = (score) => {
         jokeReport.push({ joke, score, date });
     }
     console.log(jokeReport);
+};
+let count = 1;
+const setBackground = () => {
+    backgroundCenter.setAttribute("src", `/assets/blob${count}a.svg`);
+    backgroundLeft.setAttribute("src", `/assets/blob${count}b.svg`);
+    backgroundRight.setAttribute("src", `/assets/blob${count}c.svg`);
+    count = (count % 3) + 1;
 };

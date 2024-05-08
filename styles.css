@@ -1,15 +1,55 @@
 :root {
   font-family: Helvetica, sans-serif;
   font-size: 16px;
-  --primary-color: rgb(255, 255, 96);
+  --primary-color: rgb(84, 208, 202);
+}
+
+body {
+  height: 100vh;
+  background-color: whitesmoke;
 }
 
 .main {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 100%;
+}
+
+#weather-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  font-weight: 600;
+  padding: 1rem;
+  background-color: var(--primary-color);
+  border-radius: 2rem;
+}
+
+.background-center {
+  position: absolute;
+  z-index: -1;
+  height: 100%;
+}
+
+.background-left {
+  position: absolute;
+  z-index: -1;
+  height: 20%;
+  bottom: 0;
+  left: 0;
+}
+
+.background-right {
+  position: absolute;
+  z-index: -1;
+  height: 15%;
+  right: 0;
+  top: 0;
 }
 
 .joke-container {
@@ -17,10 +57,20 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: solid 1px black;
   border-radius: 1rem;
   padding: 1rem;
-  width: 50%;
+  color: whitesmoke;
+  width: 40%;
+  text-align: center;
+}
+
+@media only screen and (max-width: 700px) {
+  .joke-container {
+    width: 90%;
+  }
+  .background-center {
+    height: 90%;
+  }
 }
 
 .joke {
@@ -32,14 +82,15 @@
 }
 
 .score-btn {
-  font-size: 1.3rem;
+  font-size: 2rem;
   border-radius: 50%;
   border: none;
-  background-color: rgb(255, 60, 60);
+  background-color: transparent;
 }
 
 .score-btn:hover {
-  background-color: cadetblue;
+  background-color: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
 }
 
 .joke-btn {
