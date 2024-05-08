@@ -37,7 +37,9 @@ const fetchWeather = () => __awaiter(void 0, void 0, void 0, function* () {
         weatherContainer.appendChild(weatherIcon);
         weatherInfo.appendChild(info);
     }
-    catch (_a) { }
+    catch (error) {
+        console.error("We couldn't fetch the weather because", error);
+    }
 });
 fetchWeather();
 const fetchJoke = () => __awaiter(void 0, void 0, void 0, function* () {
@@ -58,6 +60,7 @@ const fetchJoke = () => __awaiter(void 0, void 0, void 0, function* () {
         setBackground();
     }
     catch (error) {
+        console.error("We couldn't fetch the joke because", error);
         jokeElement.innerHTML = "Oops! Couldn't find any joke...";
     }
 });
