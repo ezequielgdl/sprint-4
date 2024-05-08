@@ -24,7 +24,7 @@ const options = {
 
 let jokeReport: {
   joke: string;
-  score: 1 | 2 | 3;
+  score: number;
   date: string;
 }[] = [];
 
@@ -80,7 +80,7 @@ jokeBtn.addEventListener("click", () => {
   fetchJoke();
 });
 
-const addScore = (score: 1 | 2 | 3) => {
+const addScore = (score: number) => {
   const joke = jokeElement.innerHTML;
   const date = new Date().toISOString();
   const jokeIndex = jokeReport.findIndex((report) => report.joke === joke);
