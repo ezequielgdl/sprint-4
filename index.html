@@ -4,10 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Joke Generator</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <p id="joke"></p>
-    <button id="next-joke">Siguiente Chiste</button>
+    <main class="main">
+      <div class="joke-container">
+        <h1>Let's start the day with a joke</h1>
+        <p id="joke" class="joke"></p>
+        <div class="report-container">
+          <button class="score-btn" onclick="addScore(Number('1'))">🙁</button>
+          <button class="score-btn" onclick="addScore(Number('2'))">🙂</button>
+          <button class="score-btn" onclick="addScore(Number('3'))">😆</button>
+        </div>
+        <button id="next-joke" class="joke-btn">Next Joke</button>
+      </div>
+    </main>
     <script src="./index.js"></script>
   </body>
 </html>

@@ -1,0 +1,50 @@
+:root {
+  font-family: Helvetica, sans-serif;
+  font-size: 16px;
+  --primary-color: rgb(255, 255, 96);
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.joke-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: solid 1px black;
+  border-radius: 1rem;
+  padding: 1rem;
+  width: 50%;
+}
+
+.joke {
+  padding: 1rem;
+}
+
+.report-container {
+  margin: 1rem;
+}
+
+.score-btn {
+  font-size: 1.3rem;
+  border-radius: 50%;
+  border: none;
+  background-color: rgb(255, 60, 60);
+}
+
+.score-btn:hover {
+  background-color: cadetblue;
+}
+
+.joke-btn {
+  border-radius: 2rem;
+  border: none;
+  padding: 0.5rem 2rem;
+  background-color: var(--primary-color);
+}
