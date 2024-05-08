@@ -10,12 +10,28 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 const jokeElement = document.getElementById("joke");
 const jokeBtn = document.getElementById("next-joke");
+const weatherInfo = document.getElementById("weather-info");
 const options = {
     headers: {
         Accept: "application/json",
     },
 };
 let jokeReport = [];
+const kelvinToCelsius = (kelvin) => {
+    return (kelvin - 273.15).toFixed(2);
+};
+const fetchWeather = () => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const res = yield fetch("https://api.openweathermap.org/data/2.5/weather?lat=41.38&lon=2.16&appid=afdb717c5e16706af6a787517e123666");
+        const data = yield res.json();
+        console.log(data.main.temp);
+        const infoText = `${kelvinToCelsius(data.main.temp)}°C - Humidity: ${data.main.humidity}%`;
+        const info = document.createTextNode(infoText);
+        weatherInfo.appendChild(info);
+    }
+    catch (_a) { }
+});
+fetchWeather();
 const fetchJoke = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const res = yield fetch("https://icanhazdadjoke.com/", options);
